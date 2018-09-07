@@ -1,0 +1,7 @@
+{
+  "name": "exchange-viewer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
