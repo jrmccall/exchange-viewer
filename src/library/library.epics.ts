@@ -22,8 +22,8 @@ export class LibraryEpics {
           this._service.getGlobalData(),
           this._service.getPoloniexOrderBook(),
           this._service.getPoloniexTickers(),
-          this._service.getCoinCapCoinData(),
-          this._service.getBittrexMarket()
+          this._service.getCoinCapCoinData()
+          //this._service.getBittrexMarket()
           //this._service.getBitfinexOrderBook()
         )
           .map((data: any[]) => AjaxTrio.getSuccessAction(

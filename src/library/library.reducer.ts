@@ -37,8 +37,8 @@ export const libraryReducer = (state: ILibraryState = INITIAL_STATE, action: IAc
         globalData: action.payload.globalData,
         poloniexOrderBook: action.payload.poloniexOrderBook,
         poloniexTickers: action.payload.poloniexTickers,
-        coinCapCoinData: action.payload.coinCapCoinData,
-        bittrexMarket: action.payload.bittrexMarket
+        coinCapCoinData: action.payload.coinCapCoinData
+        //bittrexMarket: action.payload.bittrexMarket
         //bitfinexOrderBook: action.payload.bitfinexOrderBook
       };
     case LibraryActions.LOAD_ALL.REQUEST:
