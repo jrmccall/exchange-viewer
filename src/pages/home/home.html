@@ -8,11 +8,36 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-row class="header">
+    <ion-col>Pair</ion-col>
+    <ion-col>Mkt. Cap (USD)</ion-col>
+    <ion-col>Volume</ion-col>
+    <ion-col>Price</ion-col>
+    <ion-col (click)="metricsSetter()">Metrics</ion-col>
+  </ion-row>
+  <div *ngFor="let pair of pairList$ | async">
+    <ion-row class="divider" *ngIf="dividerHelper(pair.base)">
+      <ion-col>{{pair.base}}</ion-col>
+    </ion-row>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-row (click)="pushPairPage(pair)" ngClass="{'item-divider': pair.base}">
+      <ion-col>{{pair.coin}}</ion-col>
+      <ion-col>{{pair.mktCap}}</ion-col>
+      <ion-col>{{pair.baseVolume}}</ion-col>
+      <ion-col>{{pair.last}}</ion-col>
+      <ion-col *ngIf="metricDisplayString=='all'">{{pair.obMetricAll}}</ion-col>
+      <ion-col *ngIf="metricDisplayString=='1'">{{pair.obMetric1}}</ion-col>
+      <ion-col *ngIf="metricDisplayString=='10'">{{pair.obMetric10}}</ion-col>
+    </ion-row>
+  </div>
+  <!--<ion-row *ngFor="let pair of pairList$ | async" (click)="pushPairPage(pair)" ngClass="{'item-divider': pair.base}">-->
+    <!--<ion-col>{{pair.pair}}</ion-col>-->
+    <!--<ion-col>{{pair.mktCap}}</ion-col>-->
+    <!--<ion-col>{{pair.baseVolume}}</ion-col>-->
+    <!--<ion-col>{{pair.last}}</ion-col>-->
+    <!--<ion-col *ngIf="metricDisplayString=='all'">{{pair.obMetricAll}}</ion-col>-->
+    <!--<ion-col *ngIf="metricDisplayString=='1'">{{pair.obMetric1}}</ion-col>-->
+    <!--<ion-col *ngIf="metricDisplayString=='10'">{{pair.obMetric10}}</ion-col>-->
+  <!--</ion-row>-->
 </ion-content>
