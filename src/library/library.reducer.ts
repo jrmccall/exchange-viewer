@@ -3,14 +3,16 @@ import {LibraryActions} from './library.actions';
 import {IGlobalData} from "./global-data.model";
 import {BittrexMarket} from "./bittrex-market.model";
 import {CoinCapData} from "./coin-cap-data.model";
+import {PairHelper} from "./pair-helper.model";
+import {Coin} from "./coin.model";
 
 export interface ILibraryState {
   error: any;
   isLoading: boolean;
-  globalData: IGlobalData;
-  poloniexOrderBook: any;
+  poloniexOrderBook: PairHelper[];
   poloniexTickers: any;
-  coinCapCoinData: CoinCapData[];
+  allCoins: any;
+  poloniexCoins: Coin[];
   bittrexMarket: BittrexMarket;
   bitfinexOrderBook: any;
 }
@@ -18,10 +20,10 @@ export interface ILibraryState {
 export const INITIAL_STATE: ILibraryState = {
   error: null,
   isLoading: false,
-  globalData: null,
-  poloniexOrderBook: null,
+  allCoins: null,
+  poloniexCoins: [],
+  poloniexOrderBook: [],
   poloniexTickers: null,
-  coinCapCoinData: [],
   bittrexMarket: null,
   bitfinexOrderBook: null
 };
@@ -34,18 +36,23 @@ export const libraryReducer = (state: ILibraryState = INITIAL_STATE, action: IAc
         ...state,
         error: null,
         isLoading: false,
-        globalData: action.payload.globalData,
+        allCoins: action.payload.allCoins,
         poloniexOrderBook: action.payload.poloniexOrderBook,
-        poloniexTickers: action.payload.poloniexTickers,
-        coinCapCoinData: action.payload.coinCapCoinData
-        //bittrexMarket: action.payload.bittrexMarket
-        //bitfinexOrderBook: action.payload.bitfinexOrderBook
+        poloniexTickers: action.payload.poloniexTickers
+        //bitfinexOrderBook: action.payload.bitfinexMarket
       };
     case LibraryActions.LOAD_ALL.REQUEST:
-      console.log("load all req");
       return {...state, error: null, isLoading: true};
     case LibraryActions.LOAD_ALL.ERROR:
       return {...state, error: action.payload.error, isLoading: false};
+    case LibraryActions.GET_ALL_COINS.SUCCESS:
+      return {...state, error: null, allCoins: action.payload.allCoins, isLoading: false};
+    case LibraryActions.GET_ALL_COINS.REQUEST:
+      return {...state, error: null, isLoading: true};
+    case LibraryActions.GET_ALL_COINS.ERROR:
+      return {...state, error: action.payload.error, isLoading: false};
+    case LibraryActions.SET_POLONIEX_COINS:
+      return {...state, poloniexCoins: action.payload.coins, isLoading: false};
     default:
       return state;
   }

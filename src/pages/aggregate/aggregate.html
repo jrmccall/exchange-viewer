@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Aggregate</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="split left">
+    <ion-row class="divider">
+      <ion-col>Sum of Coins Offered for BTC</ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-item>Market Cap: ${{(sumOfCoinsForBTC$ | async)?.mktCap.toExponential(5)}}</ion-item>
+      <ion-item>Sum: ${{(sumOfCoinsForBTC$ | async)?.sum}}</ion-item>
+      <ion-item>Liquidity All: ${{(sumOfCoinsForBTC$ | async)?.liqAll}}</ion-item>
+      <ion-item>Liquidity 10%: ${{(sumOfCoinsForBTC$ | async)?.liq10}}</ion-item>
+      <ion-item>Liquidity 1%: ${{(sumOfCoinsForBTC$ | async)?.liq1}}</ion-item>
+    </ion-list>
+  </div>
+
+  <div class="split right">
+    <ion-row class="divider">
+      <ion-col>Sum of Fiat Offered for BTC</ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-item>Market Cap: ${{(btcFiatValue$ | async)?.mktCap.toExponential(5)}}</ion-item>
+      <ion-item>Liquidity All: ${{(btcFiatValue$ | async)?.liquidityAll}}</ion-item>
+      <ion-item>Liquidity 10%: ${{(btcFiatValue$ | async)?.liquidity10}}</ion-item>
+      <ion-item>Liquidity 1%: ${{(btcFiatValue$ | async)?.liquidity1}}</ion-item>
+    </ion-list>
+  </div>
+</ion-content>

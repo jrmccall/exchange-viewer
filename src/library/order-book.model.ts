@@ -4,9 +4,9 @@ export interface OrderBook {
   bids: any[];
   isFrozen: string;
   seq: number;
-  last: string;
-  baseVolume: string;
-  quoteVolume: string;
+  last: number;
+  baseVolume: number;
+  quoteVolume: number;
   obMetric1: number;
   obMetric10: number;
   obMetricAll: number;
@@ -14,5 +14,5 @@ export interface OrderBook {
   quoteCoin: string;
   coin: string;
   base: string;
-  mktCap: number;
+  mktCap: string;
 }

@@ -19,21 +19,33 @@ export class LibraryEpics {
       .ofType(ajaxTrio.REQUEST)
       .switchMap((a: IAction) =>
         Observable.forkJoin(
-          this._service.getGlobalData(),
+          this._service.getCoinCapCoinData(),
           this._service.getPoloniexOrderBook(),
-          this._service.getPoloniexTickers(),
-          this._service.getCoinCapCoinData()
-          //this._service.getBittrexMarket()
-          //this._service.getBitfinexOrderBook()
+          this._service.getPoloniexTickers()
         )
           .map((data: any[]) => AjaxTrio.getSuccessAction(
             ajaxTrio,
             {
-              globalData: data[0],
+              allCoins: data[0],
               poloniexOrderBook: data[1],
-              poloniexTickers: data[2],
-              coinCapCoinData: data[3],
-              bittrexMarket: data[4]
+              poloniexTickers: data[2]
+            }
+          ))
+          .catch(response => [AjaxTrio.getErrorAction(ajaxTrio, response.status)])
+      );
+  }
+
+  getAllCoins(ajaxTrio: AjaxTrio){
+    return action$ => action$
+      .ofType(ajaxTrio.REQUEST)
+      .switchMap((a: IAction) =>
+        Observable.forkJoin(
+          this._service.getCoinCapCoinData()
+        )
+          .map((data: any[]) => AjaxTrio.getSuccessAction(
+            ajaxTrio,
+            {
+              allCoins: data[0]
             }
           ))
           .catch(response => [AjaxTrio.getErrorAction(ajaxTrio, response.status)])
