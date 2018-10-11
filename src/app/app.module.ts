@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import {LiquidityProvidedPage} from '../pages/liquidity-provided/liquidity-provided';
 import {AggregatePage} from '../pages/aggregate/aggregate';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,11 +16,12 @@ import {Http, JsonpModule} from "@angular/http";
 import {HttpModule} from "@angular/http";
 import {PoloniexService} from "../services/exchange-services/poloniex-service";
 import {CoincapService} from "../services/coin-data-services/coincap-service";
+import {Numeral} from "../services/numeral/numeral";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    LiquidityProvidedPage,
     AggregatePage,
     PairPage
   ],
@@ -37,7 +38,7 @@ import {CoincapService} from "../services/coin-data-services/coincap-service";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    LiquidityProvidedPage,
     AggregatePage,
     PairPage
   ],
@@ -49,7 +50,8 @@ import {CoincapService} from "../services/coin-data-services/coincap-service";
     HttpClientModule,
     HttpModule,
     PoloniexService,
-    CoincapService
+    CoincapService,
+    Numeral
   ]
 })
 export class AppModule {}

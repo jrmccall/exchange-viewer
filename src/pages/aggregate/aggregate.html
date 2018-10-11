@@ -14,12 +14,25 @@
     </ion-row>
 
     <ion-list>
-      <ion-item>Market Cap: ${{(sumOfCoinsForBTC$ | async)?.mktCap.toExponential(5)}}</ion-item>
-      <ion-item>Sum: ${{(sumOfCoinsForBTC$ | async)?.sum}}</ion-item>
-      <ion-item>Liquidity All: ${{(sumOfCoinsForBTC$ | async)?.liqAll}}</ion-item>
-      <ion-item>Liquidity 10%: ${{(sumOfCoinsForBTC$ | async)?.liq10}}</ion-item>
-      <ion-item>Liquidity 1%: ${{(sumOfCoinsForBTC$ | async)?.liq1}}</ion-item>
+      <ion-item>Market Cap: {{(sumOfCoinsForBTC$ | async)?.mktCap}}</ion-item>
+      <ion-item>Sum: {{(sumOfCoinsForBTC$ | async)?.sum}}</ion-item>
+      <ion-item>Liquidity All: {{(sumOfCoinsForBTC$ | async)?.liqAll}}</ion-item>
+      <ion-item>Liquidity 10%: {{(sumOfCoinsForBTC$ | async)?.liq10}}</ion-item>
+      <ion-item>Liquidity 1%: {{(sumOfCoinsForBTC$ | async)?.liq1}}</ion-item>
     </ion-list>
+
+    <ion-row class="divider">
+      <ion-col>Offerings of Each Coin</ion-col>
+    </ion-row>
+    <ion-row class="divider">
+      <ion-col>Coin</ion-col>
+      <ion-col>Offering</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let coin of listOfCoinsForBTC$ | async">
+      <ion-col>{{coin.name}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetter(coin.amount)}}</ion-col>
+    </ion-row>
   </div>
 
   <div class="split right">
@@ -28,10 +41,10 @@
     </ion-row>
 
     <ion-list>
-      <ion-item>Market Cap: ${{(btcFiatValue$ | async)?.mktCap.toExponential(5)}}</ion-item>
-      <ion-item>Liquidity All: ${{(btcFiatValue$ | async)?.liquidityAll}}</ion-item>
-      <ion-item>Liquidity 10%: ${{(btcFiatValue$ | async)?.liquidity10}}</ion-item>
-      <ion-item>Liquidity 1%: ${{(btcFiatValue$ | async)?.liquidity1}}</ion-item>
+      <ion-item>Market Cap: {{numeral.formatNumToLetter((btcFiatValue$ | async)?.mktCap)}}</ion-item>
+      <ion-item>Liquidity All: {{numeral.formatNumToLetter((btcFiatValue$ | async)?.liquidityAll)}}</ion-item>
+      <ion-item>Liquidity 10%: {{numeral.formatNumToLetter((btcFiatValue$ | async)?.liquidity10)}}</ion-item>
+      <ion-item>Liquidity 1%: {{numeral.formatNumToLetter((btcFiatValue$ | async)?.liquidity1)}}</ion-item>
     </ion-list>
   </div>
 </ion-content>

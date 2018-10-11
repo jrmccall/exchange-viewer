@@ -50,7 +50,7 @@ export class LibraryService {
 
   getBitfinexTickers(){
     let getTickersURL = bitfinex_public_api_url+'tickers?symbols=ALL';
-    // let httpClient = this.httpClient;
+    let httpClient = this.httpClient;
     let tickers = {};
     // var promise = new Promise(function(resolve, reject) {
     //   // do a thing, possibly async, then…
