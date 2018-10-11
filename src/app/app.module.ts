@@ -4,22 +4,24 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import {AggregatePage} from '../pages/aggregate/aggregate';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {LibraryModule} from "../library/library.module";
 import {StoreModule} from "../store/store.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
 import {PairPage} from "../pages/pair/pair";
-import {Http} from "@angular/http";
+import {Http, JsonpModule} from "@angular/http";
 import {HttpModule} from "@angular/http";
+import {PoloniexService} from "../services/exchange-services/poloniex-service";
+import {CoincapService} from "../services/coin-data-services/coincap-service";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
+    AggregatePage,
     PairPage
   ],
   imports: [
@@ -28,13 +30,15 @@ import {HttpModule} from "@angular/http";
     LibraryModule,
     StoreModule,
     HttpClientModule,
-    HttpModule
+    HttpClientJsonpModule,
+    HttpModule,
+    JsonpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
+    AggregatePage,
     PairPage
   ],
   providers: [
@@ -43,7 +47,9 @@ import {HttpModule} from "@angular/http";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LibraryModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    PoloniexService,
+    CoincapService
   ]
 })
 export class AppModule {}
