@@ -7,6 +7,7 @@ import { LiquidityProvidedPage } from '../pages/liquidity-provided/liquidity-pro
 import { AggregatePage } from '../pages/aggregate/aggregate';
 import {LibraryActions} from "../library/library.actions";
 import {dispatch} from "@angular-redux/store";
+import {StartPage} from "../pages/start/start";
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,7 @@ import {dispatch} from "@angular-redux/store";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = AggregatePage;
+  rootPage: any = StartPage;
 
   pages: Array<{title: string, component: any}>;
 

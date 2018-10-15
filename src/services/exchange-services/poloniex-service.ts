@@ -6,23 +6,55 @@ import {Coin} from "../../library/coin.model";
 import {Pair} from "../../library/pair.model";
 import {PairHelper} from "../../library/pair-helper.model";
 import {LibraryActions} from "../../library/library.actions";
+import {Component} from "@angular/core";
 
+@Component({
+
+})
 export class PoloniexService{
 
   @select(['library', 'allCoins']) allCoins$: Observable<any>;
   @select(['library', 'poloniexOrderBook']) poloniexOB$: Observable<any>;
   @select(['library', 'poloniexTickers']) poloniexTickers$: Observable<any>;
 
-  constructor(){
+  constructor(private _libraryActions: LibraryActions){
 
   }
 
   formatDataForLibrary(){
+    // let promise = new Promise(function(resolve, reject) {
+    //   let pairList$: Observable<PairHelper[]> = this.makePairList();
+    //   let baseList$ = this.makeListFromOriginalBases(pairList$);
+    //   let secondList$ = this.makeListFromOthers(pairList$);
+    //   let finalList$ = this.combineCoinLists(baseList$, secondList$);
+    //
+    //   let finalList: Coin[] = [];
+    //   finalList$.subscribe(data => finalList = data);
+    //
+    //   if(!isEmpty(finalList)){
+    //     resolve(finalList);
+    //   }
+    // });
+    //let libraryActions = this._libraryActions;
+    console.log("format for library");
     let pairList$: Observable<PairHelper[]> = this.makePairList();
     let baseList$ = this.makeListFromOriginalBases(pairList$);
     let secondList$ = this.makeListFromOthers(pairList$);
     let finalList$ = this.combineCoinLists(baseList$, secondList$);
     return finalList$;
+
+    // promise.then(function(result){
+    //   console.log("Success");
+    //   this.setCoinsInLibrary(result);
+    // });
+    //this.setCoinsInLibrary(finalList$);
+  }
+
+  setCoinsInLibrary(finalList$: Observable<Coin[]>){
+    let coins: Coin[] = [];
+    finalList$.subscribe(data => coins = data);
+    console.log(coins);
+    this._libraryActions.setPoloniexCoins(coins);
   }
 
   makePairList(){
@@ -31,7 +63,7 @@ export class PoloniexService{
       this.allCoins$,
       this.poloniexTickers$,
       (data: any, coinData: any, poloniexTickers: any) => {
-        if(data == null || coinData == null || poloniexTickers == null){ return []; }
+        if(data == null || coinData == null || poloniexTickers == null){ console.log("makePairList"); return []; }
         let pairList: PairHelper[] = [];
         for(let key in data){
           if(data.hasOwnProperty(key)){
@@ -275,6 +307,7 @@ export class PoloniexService{
       secondList,
       (baseList: Coin[], secondList: Coin[]) => {
         if(isEmpty(baseList) || isEmpty(secondList)){
+          console.log("One or both of the lists were empty when combining");
           return [];
         }
         for(let i=0; i<secondList.length; i++){
@@ -294,6 +327,7 @@ export class PoloniexService{
 
         }
         baseList.sort(function(a, b){ return b.mktCap-a.mktCap; });
+        //this._libraryActions.setPoloniexCoins(baseList);
         return baseList;
       });
     return finalList$;

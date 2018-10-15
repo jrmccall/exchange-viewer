@@ -49,34 +49,8 @@ export class LibraryService {
   }
 
   getBitfinexTickers(){
-    let getTickersURL = bitfinex_public_api_url+'tickers?symbols=ALL';
-    let httpClient = this.httpClient;
-    let tickers = {};
-    // var promise = new Promise(function(resolve, reject) {
-    //   // do a thing, possibly async, then…
-    //   let tickers = httpClient.get(getTickersURL);
-    //   console.log(tickers);
-    //   let empty = false;
-    //   tickers.isEmpty().subscribe(result => empty = result);
-    //   if (empty) {
-    //     console.log("resolve");
-    //     resolve(tickers);
-    //   }
-    //   else {
-    //     console.log("reject");
-    //     reject(Error("It broke"));
-    //   }
-    // });
-    //
-    // promise.then(function(result) {
-    //   tickers = result;
-    //   let temp = {};
-    //   console.log(tickers.elementAt(0));
-    // }, function(err) {
-    //   console.log(err); // Error: "It broke"
-    // });
-    return tickers;
-    //return this.httpClient.get(getTickersURL);
+    const getTickersURL = bitfinex_public_api_url+'tickers?symbols=ALL';
+    return this.httpClient.get<any>(getTickersURL);
   }
 
   getBitfinexOrderBook(){

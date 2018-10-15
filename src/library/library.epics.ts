@@ -22,6 +22,7 @@ export class LibraryEpics {
           this._service.getCoinCapCoinData(),
           this._service.getPoloniexOrderBook(),
           this._service.getPoloniexTickers()
+          //this._service.getBitfinexTickers()
         )
           .map((data: any[]) => AjaxTrio.getSuccessAction(
             ajaxTrio,
@@ -29,6 +30,7 @@ export class LibraryEpics {
               allCoins: data[0],
               poloniexOrderBook: data[1],
               poloniexTickers: data[2]
+              //bitfinexTickers: data[3]
             }
           ))
           .catch(response => [AjaxTrio.getErrorAction(ajaxTrio, response.status)])

@@ -17,13 +17,15 @@ import {HttpModule} from "@angular/http";
 import {PoloniexService} from "../services/exchange-services/poloniex-service";
 import {CoincapService} from "../services/coin-data-services/coincap-service";
 import {Numeral} from "../services/numeral/numeral";
+import {StartPage} from "../pages/start/start";
 
 @NgModule({
   declarations: [
     MyApp,
     LiquidityProvidedPage,
     AggregatePage,
-    PairPage
+    PairPage,
+    StartPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import {Numeral} from "../services/numeral/numeral";
     MyApp,
     LiquidityProvidedPage,
     AggregatePage,
-    PairPage
+    PairPage,
+    StartPage
   ],
   providers: [
     StatusBar,

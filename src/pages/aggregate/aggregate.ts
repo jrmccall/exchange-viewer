@@ -20,6 +20,7 @@ export class AggregatePage {
 
   @select(['library', 'allCoins']) allCoins$: Observable<any>;
   @select(['library', 'isLoading']) isLoading$: Observable<any>;
+  @select(['library', 'poloniexCoins']) poloniexCoins$: Observable<Coin[]>;
 
   fiatPair = {};
   loading: any;
@@ -32,31 +33,31 @@ export class AggregatePage {
   }
 
   ionViewDidLoad() {
-    this.isLoading$.distinctUntilChanged().subscribe(isLoading => {
-      if(isLoading){
-        if(!this.loading){
-          this.loading = this.loadingCtrl.create({content: 'Please wait...'});
-        }
-        this.loading.present();
-      } else {
-        if(this.loading){
-          this.loading.dismiss();
-          this.loading = null;
-        }
-      }
-    });
+    // this.isLoading$.distinctUntilChanged().subscribe(isLoading => {
+    //   if(isLoading){
+    //     if(!this.loading){
+    //       this.loading = this.loadingCtrl.create({content: 'Please wait...'});
+    //     }
+    //     this.loading.present();
+    //   } else {
+    //     if(this.loading){
+    //       this.loading.dismiss();
+    //       this.loading = null;
+    //     }
+    //   }
+    // });
 
 
   }
 
   ionViewWillLeave(){
-    let coins: Coin[] = [];
-    this.poloniexCoins$.subscribe(data => coins = data);
-    console.log(coins);
-    this._libraryActions.setPoloniexCoins(coins);
+    // let coins: Coin[] = [];
+    // this.poloniexCoins$.subscribe(data => coins = data);
+    // console.log(coins);
+    // this._libraryActions.setPoloniexCoins(coins);
   }
 
-  poloniexCoins$: Observable<Coin[]> = this.poloniexService.formatDataForLibrary();
+  //poloniexCoins$: Observable<Coin[]> = this.poloniexService.formatDataForLibrary();
 
   btcFiatValue$: Observable<Pair> = this.poloniexCoins$.map((poloniexCoins: Coin[]) => {
     if(isEmpty(poloniexCoins)){

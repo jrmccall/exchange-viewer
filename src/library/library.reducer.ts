@@ -14,7 +14,7 @@ export interface ILibraryState {
   allCoins: any;
   poloniexCoins: Coin[];
   bittrexMarket: BittrexMarket;
-  bitfinexOrderBook: any;
+  bitfinexTickers: any;
 }
 
 export const INITIAL_STATE: ILibraryState = {
@@ -25,7 +25,7 @@ export const INITIAL_STATE: ILibraryState = {
   poloniexOrderBook: [],
   poloniexTickers: null,
   bittrexMarket: null,
-  bitfinexOrderBook: null
+  bitfinexTickers: null
 };
 
 export const libraryReducer = (state: ILibraryState = INITIAL_STATE, action: IAction): ILibraryState => {
@@ -39,7 +39,7 @@ export const libraryReducer = (state: ILibraryState = INITIAL_STATE, action: IAc
         allCoins: action.payload.allCoins,
         poloniexOrderBook: action.payload.poloniexOrderBook,
         poloniexTickers: action.payload.poloniexTickers,
-        bitfinexOrderBook: action.payload.bitfinexMarket
+        bitfinexTickers: action.payload.bitfinexTickers
       };
     case LibraryActions.LOAD_ALL.REQUEST:
       return {...state, error: null, isLoading: true};
