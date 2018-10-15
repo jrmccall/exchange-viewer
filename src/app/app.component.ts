@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { LiquidityProvidedPage } from '../pages/liquidity-provided/liquidity-provided';
 import { AggregatePage } from '../pages/aggregate/aggregate';
 import {LibraryActions} from "../library/library.actions";
 import {dispatch} from "@angular-redux/store";
@@ -14,7 +14,7 @@ import {dispatch} from "@angular-redux/store";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = AggregatePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -23,8 +23,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Aggregate', component: AggregatePage }
+      { title: 'Aggregate', component: AggregatePage },
+      { title: 'Liquidity Provided', component: LiquidityProvidedPage }
     ];
 
   }

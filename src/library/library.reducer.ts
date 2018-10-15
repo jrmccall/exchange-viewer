@@ -38,8 +38,8 @@ export const libraryReducer = (state: ILibraryState = INITIAL_STATE, action: IAc
         isLoading: false,
         allCoins: action.payload.allCoins,
         poloniexOrderBook: action.payload.poloniexOrderBook,
-        poloniexTickers: action.payload.poloniexTickers
-        //bitfinexOrderBook: action.payload.bitfinexMarket
+        poloniexTickers: action.payload.poloniexTickers,
+        bitfinexOrderBook: action.payload.bitfinexMarket
       };
     case LibraryActions.LOAD_ALL.REQUEST:
       return {...state, error: null, isLoading: true};

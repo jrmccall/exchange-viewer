@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Liquidity Provided</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row class="header">
+    <ion-col>Pair</ion-col>
+    <ion-col (click)="sortByMarketCap()">Mkt. Cap
+      <ion-icon *ngIf="(sortByMarketCap$ | async) == true" name="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="(sortByMarketCap$ | async) == false" name="md-arrow-dropup"></ion-icon>
+    </ion-col>
+    <ion-col>Price</ion-col>
+    <ion-col (click)="sortByVolume()">Volume
+      <ion-icon *ngIf="(sortByVolume$ | async) == true" name="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="(sortByVolume$ | async) == false" name="md-arrow-dropup"></ion-icon>
+    </ion-col>
+    <ion-col (click)="sortByLiqAll()">All Liquidity
+      <ion-icon *ngIf="(sortByLiqAll$ | async) == true" name="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="(sortByLiqAll$ | async) == false" name="md-arrow-dropup"></ion-icon>
+    </ion-col>
+    <ion-col (click)="sortByLiq10()">10% Liquidity
+      <ion-icon *ngIf="(sortByLiq10$ | async) == true" name="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="(sortByLiq10$ | async) == false" name="md-arrow-dropup"></ion-icon>
+    </ion-col>
+    <ion-col (click)="sortByLiq1()">1% Liquidity
+      <ion-icon *ngIf="(sortByLiq1$ | async) == true" name="md-arrow-dropdown"></ion-icon>
+      <ion-icon *ngIf="(sortByLiq1$ | async) == false" name="md-arrow-dropup"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <div *ngFor="let coin of poloniexCoinsDisplay$ | async">
+    <ion-row class="divider">
+      <ion-col>{{coin.name}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetter(coin.mktCap)}}</ion-col>
+      <ion-col>-</ion-col>
+      <ion-col>{{numeral.formatNumToLetterPlain(coin.sumVolume)}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetterPlain(coin.sumLiquidityAll)}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetterPlain(coin.sumLiquidity10)}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetterPlain(coin.sumLiquidity1)}}</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let pair of coin.pairs" (click)="pushPairPage(pair)">
+      <ion-col>{{pair.secondCoin}}</ion-col>
+      <ion-col>{{numeral.formatNumToLetter(pair.mktCap)}}</ion-col>
+      <ion-col>{{(+pair.last).toFixed(8)}}</ion-col>
+      <ion-col>{{pair.volume}}</ion-col>
+      <ion-col>{{pair.liquidityAll}}</ion-col>
+      <ion-col>{{pair.liquidity10}}</ion-col>
+      <ion-col>{{pair.liquidity1}}</ion-col>
+    </ion-row>
+  </div>
+</ion-content>

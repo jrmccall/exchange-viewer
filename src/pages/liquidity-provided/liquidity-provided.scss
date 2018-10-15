@@ -2,10 +2,16 @@ page-home {
   .header ion-col {
     font-weight: 900;
     font-size: 1.4em;
+
   }
   .divider {
     background-color: lightgray;
     font-size: 1.2em;
     font-weight: 600;
+  }
+  .left{
+    padding-left: 0;
+    text-align: left;
+    float: left;
   }
 }
